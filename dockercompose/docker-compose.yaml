@@ -29,6 +29,8 @@ services:
           - webservice
     expose:
       - 8080
+#    extra_hosts:
+#      - "obliksaas_db:10.22.10.100"
     volumes:
       - ./log:/opt/tomcat/logs
       - ./webservice:/opt/tomcat/webapps/wsa/wsa1
