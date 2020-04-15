@@ -1,0 +1,71 @@
+
+If you are planning to use a Progress database or application server over a 
+secure https or SSL connection, you need CA/Root digital certificates to 
+validate the server's digital certificate.  Using certificates can be confusing
+so here are a couple of tips.
+
+First, you need to SSL enable the [web] server.  You do this by creating a
+public/private RSA or DSA keypair and obtaining a digital certificate for the
+public key from a Certificate Authority such as Verisign.  The utilities for
+performing these operations will vary from vendor to vendor and if the SSL 
+enabled server is not supplied by Progress you should refer to its documentation
+for which utilities to run and how to run them.  
+                               
+The client who is connecting to the SSL enabled server is required to have a 
+copy of the issuing Certificate Authority's digital certificate.  If the SSL 
+enabled server's digital certificate was issued by a public CA such as RSA,
+Verisign or  Thawte, this step is easier because Progress ships the Root digital
+certificates for these public CAs with its client products.  You will find these
+root certificates in the <install-dir>/certs directory.
+
+If the SSL enabled server's digital certificate was issued by a Certificate
+Authority whose digital certificates is not present in the <install-dir>/certs
+directory you will one, you need to take additional steps before the Progress 
+client (or WebClient) will be able to establish a trust relationship with 
+your SSL enabled server.  
+
+    If you see this error from your Progress client it indicates that it 
+    cannot find the Root digital certificate that it needs to validate the
+    SSL server's digital certificate.
+    
+         "Secure Socket Layer (SSL) failure. error code -54: unable to
+         get local issuer certificate (9318)".
+
+      1. Obtain a copy of a PEM encoded certificate from the Certificate 
+         Authority. 
+
+      2. Copy that PEM file onto the machine where the Progress client
+         will run.
+
+      3. On the client machine, run the certutil -import or mkhashfile command 
+         from the <install-dir>/bin directory. 
+
+         This creates a copy of the PEM encoded certificate file from step
+         2 as a hashed file name and copies it to the <install-dir>/certs
+         directory on the client machine.
+
+         Before running either of these utilities set the DLC (same as 
+         <install-dir>) environment variable. 
+
+         It may be possible to run these utilities in a PROENV shell.  PROENV 
+         will properly set DLC.
+
+ 
+When you are connecting to a SSL enabled Progress server, an additional 
+verification step is performed by the client to ensure the server machine 
+contains a valid certificate.  The client compares the hostname specified
+in the connection URL ("-URL https://<hostname>/...") to the Common
+Name stored in the server's certificate. They have to be an exact match, 
+otherwise the client will report an error during the authentication of the 
+Server Certificate resulting in the message:  "Secure Socket Layer (SSL) 
+failure. error code -55: CONNECT HostName: (<hostName>) does not match 
+Certificate: (<commonName>) (9318)". 
+
+The "Common Name" as stored in the server certificate should be the 
+DNS name of the SSL enabled server system. 
+
+You can override this additional verification by setting the "-nohostverify"
+option on the connection statement. For example, 
+CONNECT("-URL https://<hostname>/...  -nohostverify").  
+
+

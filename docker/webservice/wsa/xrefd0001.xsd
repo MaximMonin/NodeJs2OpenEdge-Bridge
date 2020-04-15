@@ -1,0 +1,323 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="uri:schemas-progress-com:XREFD:0001" xmlns:tns="uri:schemas-progress-com:XREFD:0001" xmlns:prodata="urn:schemas-progress-com:xml-prodata:0001" targetNamespace="uri:schemas-progress-com:XREFD:0001" elementFormDefault="qualified">
+  <xsd:element name="Cross-reference" prodata:proDataSet="true">
+    <xsd:annotation>
+      <xsd:documentation>Root element for cross-reference information of a procedure / class</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Source" minOccurs="0" maxOccurs="unbounded" prodata:undo="true">
+          <xsd:annotation>
+            <xsd:documentation>Defines a Source element for each file referenced, which is either the procedure / class file or include files</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Source-guid" type="xsd:string" nillable="true" prodata:userOrder="1">
+                <xsd:annotation>
+                  <xsd:documentation>Defines a GUID value for the group of cross-reference information. Enables more than one XML file to be loaded into the same dataset, as each group of rereferences for a given procedure / class file will contain a distinct GUID identifier.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="File-num" type="xsd:int" nillable="true" prodata:userOrder="2">
+                <xsd:annotation>
+                  <xsd:documentation>A sequential value, starting at 0, for each file referenced</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Reference" minOccurs="0" maxOccurs="unbounded" prodata:undo="true">
+                <xsd:annotation>
+                  <xsd:documentation>The information for a given cross-reference</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Source-guid" type="xsd:string" nillable="true" prodata:userOrder="1"/>
+                    <xsd:element name="File-num" type="xsd:int" nillable="true" prodata:userOrder="2"/>
+                    <xsd:element name="Ref-seq" type="xsd:int" nillable="true" prodata:userOrder="3">
+                      <xsd:annotation>
+                        <xsd:documentation>Sequential value, starting at 1, for each reference</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Line-num" type="xsd:int" nillable="true" prodata:userOrder="4">
+                      <xsd:annotation>
+                        <xsd:documentation>Line where the reference was found, relative to the source file</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Object-context" type="xsd:string" nillable="true" prodata:userOrder="7">
+                      <xsd:annotation>
+                        <xsd:documentation>Defines some context for the object identifier, when necessary. For example, it may contain PERSISTENT, REMOTE, SUPER or STORED-PROC for RUN references; OVERRIDE and/or FINAL for METHOD references; the object reference for CAST references; QUERY, DATASET or DATASOURCE for METHOD references; 'FOR EACH' or 'OPEN QUERY' for SORT-BY-EXP references; FORMAT or STACKED-LABEL for STRING references; PUBLIC-DATA-MEMBER, INHERITED-DATA-MEMBER, SEQUENCE, SHARED or [database].table for ACCESS and UPDATE references; index-name or RECID for SEARCH references; field-name or SHARED for REFERENCE references; [database].table for SORT-ACCESS references.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Access-mode" type="xsd:string" nillable="true" prodata:userOrder="8">
+                      <xsd:annotation>
+                        <xsd:documentation>It may be 'PUBLIC' or 'PROTECTED' for references from class objects </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Data-member-ref" type="xsd:string" nillable="true" prodata:userOrder="9">
+                      <xsd:annotation>
+                        <xsd:documentation>For data member references, it can be 'D' for data-member, 'I' for inherited-data-member and inherited-property or 'P' for property, when appropriate.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Temp-ref" type="xsd:string" nillable="true" prodata:userOrder="10">
+                      <xsd:annotation>
+                        <xsd:documentation>Defines whether a reference is a temp-table ('T') or work-table ('W')</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Detail" type="xsd:string" nillable="true" prodata:userOrder="11">
+                      <xsd:annotation>
+                        <xsd:documentation>Defines some detail information that does not belong in any other element. It includes the return type for FUNCTION, METHOD, CONSTRUCTOR and DESTRUCTOR references, the BY clause for SORT-BY-EXP references, [database].table-name for the LIKE option SHR-WORKTABLE and NEW-SHR-WORKTABLE references, WHOLE-INDEX for SEARCH references</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Class-ref" minOccurs="0" maxOccurs="unbounded" prodata:undo="true">
+                      <xsd:annotation>
+                        <xsd:documentation>Defines specific information for a CLASS reference</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="Source-guid" type="xsd:string" nillable="true"/>
+                          <xsd:element name="Ref-seq" type="xsd:int" nillable="true"/>
+                          <xsd:element name="Inherited-list" type="xsd:string" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Space delimited list of the names of super classes</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Implements-list" type="xsd:string" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Space delimited list of the name of the interfaces the class implements</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Has-use-pool" type="xsd:boolean" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Logical value which defines if the option USE-WIDGET-POOL was specified</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Is-final" type="xsd:boolean" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Logical value that defines if a class is FINAL</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="String-ref" minOccurs="0" maxOccurs="unbounded" prodata:undo="true">
+                      <xsd:annotation>
+                        <xsd:documentation>Defines specific information for a STRING reference</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="Source-guid" type="xsd:string" nillable="true"/>
+                          <xsd:element name="Ref-seq" type="xsd:int" nillable="true"/>
+                          <xsd:element name="Max-length" type="xsd:int" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Lentgth of string</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Justification" type="xsd:string" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Defines if a justification modifier was specified, such as LEFT,RIGHT,NONE,CENTER.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Translatable" type="xsd:boolean" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Logical value that defines if string is translatable</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="Parameter-ref" minOccurs="0" maxOccurs="unbounded" prodata:undo="true">
+                      <xsd:annotation>
+                        <xsd:documentation>Parameter information for references such as PROCEDURE, FUNCTION, METHOD, EXTERN and DLL-ENTRY</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="Source-guid" type="xsd:string" nillable="true" prodata:userOrder="1"/>
+                          <xsd:element name="Ref-seq" type="xsd:int" nillable="true" prodata:userOrder="2"/>
+                          <xsd:element name="Dimension" type="xsd:int" nillable="true" prodata:userOrder="7">
+                            <xsd:annotation>
+                              <xsd:documentation>Number of extents if determinate array, the unknown value if indeterminate array or 0 if non-array parameter.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Is-append" type="xsd:boolean" nillable="true" prodata:userOrder="8">
+                            <xsd:annotation>
+                              <xsd:documentation>Logical value that defines whether the APPEND option was specified</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Dataset-guid" type="xsd:string" nillable="true" prodata:userOrder="9">
+                            <xsd:annotation>
+                              <xsd:documentation>Thwe GUID value of a dataset referenxe</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                        </xsd:sequence>
+                        <xsd:attribute name="Order" type="xsd:int" prodata:userOrder="3">
+                          <xsd:annotation>
+                            <xsd:documentation>A numeric value, starting at 1, which defines the order of the parameter in the procedure/function/method signature</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="Parameter-mode" type="xsd:string" prodata:userOrder="4">
+                          <xsd:annotation>
+                            <xsd:documentation>Contains the value INPUT, INPUT-OUTPUT, OUTPUT or BUFFER</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="Parameter-name" type="xsd:string" prodata:userOrder="5">
+                          <xsd:annotation>
+                            <xsd:documentation>The name of the parameter (or buffer name)</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="Parameter-type" type="xsd:string" prodata:userOrder="6">
+                          <xsd:annotation>
+                            <xsd:documentation>The data type of the parameter (character, integer, etc), TABLE, TABLE-HANDLE, DATASET, DATASET-HANDLE or the table name for BUFFER parameters.</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:attribute>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="Dataset-ref" minOccurs="0" maxOccurs="unbounded" prodata:undo="true">
+                      <xsd:annotation>
+                        <xsd:documentation>Defines specific information for a dataset object</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="Source-guid" type="xsd:string" nillable="true"/>
+                          <xsd:element name="Dataset-guid" type="xsd:string" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Defines a GUID value for the dataset object</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Ref-seq" type="xsd:int" nillable="true"/>
+                          <xsd:element name="N-uri" type="xsd:string" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>The value specified in the NAMESPACE-URI option</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="N-prefix" type="xsd:string" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>The value specified in the NAMESPACE-PREFIX option</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Is-reference" type="xsd:boolean" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Logical value which corresponds to the REFERENCE-ONLY option</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Buffer-list" type="xsd:string" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Comma-separated list of the buffer names in the dataset object</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Data-links" type="xsd:int" nillable="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Number of data relations defined, which defines the number of Relation elements for a given dataset reference</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Relation" minOccurs="0" maxOccurs="unbounded" prodata:undo="true">
+                            <xsd:annotation>
+                              <xsd:documentation>Defines a data relation for a dataset object</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="Source-guid" type="xsd:string" nillable="true" prodata:userOrder="1"/>
+                                <xsd:element name="Dataset-guid" type="xsd:string" nillable="true" prodata:userOrder="2">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Defines the GUID of the parent dataset element</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="Parent-buffer-name" type="xsd:string" nillable="true" prodata:userOrder="4">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Name of the parent buffer in the data relation</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="Child-buffer-name" type="xsd:string" nillable="true" prodata:userOrder="5">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Name of the child buffer in the data relation</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="Relation-list" type="xsd:string" nillable="true" prodata:userOrder="6">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Comma-separated list of field mappings</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                              </xsd:sequence>
+                              <xsd:attribute name="Relation-name" type="xsd:string" prodata:userOrder="3">
+                                <xsd:annotation>
+                                  <xsd:documentation>Defines the relation name</xsd:documentation>
+                                </xsd:annotation>
+                              </xsd:attribute>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                  <xsd:attribute name="Reference-type" type="xsd:string" prodata:userOrder="5">
+                    <xsd:annotation>
+                      <xsd:documentation>The reference type, such as ACCESS, INCLUDE, etc</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:attribute>
+                  <xsd:attribute name="Object-identifier" type="xsd:string" prodata:userOrder="6">
+                    <xsd:annotation>
+                      <xsd:documentation>Identifies the reference</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:attribute>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="File-name" type="xsd:string" prodata:userOrder="3">
+              <xsd:annotation>
+                <xsd:documentation>Defines the file name where the reference was found</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+    <xsd:unique name="source-guid" prodata:primaryIndex="true">
+      <xsd:selector xpath=".//tns:Source"/>
+      <xsd:field xpath="tns:Source-guid"/>
+      <xsd:field xpath="tns:File-num"/>
+    </xsd:unique>
+    <xsd:unique name="Reference_source-guid" prodata:primaryIndex="true">
+      <xsd:selector xpath=".//tns:Reference"/>
+      <xsd:field xpath="tns:Source-guid"/>
+      <xsd:field xpath="tns:File-num"/>
+      <xsd:field xpath="tns:Ref-seq"/>
+    </xsd:unique>
+    <xsd:unique name="Class-ref_source-guid" prodata:primaryIndex="true">
+      <xsd:selector xpath=".//tns:Class-ref"/>
+      <xsd:field xpath="tns:Source-guid"/>
+      <xsd:field xpath="tns:Ref-seq"/>
+    </xsd:unique>
+    <xsd:unique name="String-ref_source-guid" prodata:primaryIndex="true">
+      <xsd:selector xpath=".//tns:String-ref"/>
+      <xsd:field xpath="tns:Source-guid"/>
+      <xsd:field xpath="tns:Ref-seq"/>
+    </xsd:unique>
+    <xsd:unique name="Parameter-ref_source-guid" prodata:primaryIndex="true">
+      <xsd:selector xpath=".//tns:Parameter-ref"/>
+      <xsd:field xpath="tns:Source-guid"/>
+      <xsd:field xpath="tns:Ref-seq"/>
+      <xsd:field xpath="@Order"/>
+    </xsd:unique>
+    <xsd:unique name="Dataset-ref_source-guid" prodata:primaryIndex="true">
+      <xsd:selector xpath=".//tns:Dataset-ref"/>
+      <xsd:field xpath="tns:Source-guid"/>
+      <xsd:field xpath="tns:Dataset-guid"/>
+      <xsd:field xpath="tns:Ref-seq"/>
+    </xsd:unique>
+    <xsd:keyref name="rel-main" refer="tns:source-guid" prodata:nested="true">
+      <xsd:selector xpath=".//tns:Reference"/>
+      <xsd:field xpath="tns:Source-guid"/>
+      <xsd:field xpath="tns:File-num"/>
+    </xsd:keyref>
+  </xsd:element>
+  <xsd:annotation>
+    <xsd:appinfo>
+      <prodata:index name="Relation-guid" prodata:primaryIndex="true">
+        <prodata:table name="Relation"/>
+        <prodata:field name="Source-guid"/>
+        <prodata:field name="Dataset-guid"/>
+      </prodata:index>
+      <prodata:relation name="rel-class" prodata:nested="true" prodata:parent="Reference" prodata:child="Class-ref" prodata:relationFields="Source-guid,Source-guid,Ref-seq,Ref-seq"/>
+      <prodata:relation name="rel-string" prodata:nested="true" prodata:parent="Reference" prodata:child="String-ref" prodata:relationFields="Source-guid,Source-guid,Ref-seq,Ref-seq"/>
+      <prodata:relation name="rel-param" prodata:nested="true" prodata:parent="Reference" prodata:child="Parameter-ref" prodata:relationFields="Source-guid,Source-guid,Ref-seq,Ref-seq"/>
+      <prodata:relation name="rel-dataset" prodata:nested="true" prodata:parent="Reference" prodata:child="Dataset-ref" prodata:relationFields="Source-guid,Source-guid,Ref-seq,Ref-seq"/>
+      <prodata:relation name="rel-Relation" prodata:nested="true" prodata:parent="Dataset-ref" prodata:child="Relation" prodata:relationFields="Source-guid,Source-guid,Dataset-guid,Dataset-guid"/>
+    </xsd:appinfo>
+  </xsd:annotation>
+</xsd:schema>

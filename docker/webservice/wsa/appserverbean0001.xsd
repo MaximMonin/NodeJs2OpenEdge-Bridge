@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 rel. 3 sp1 (http://www.altova.com) by Dave (W3C) -->
+<xs:schema xmlns:AppServer="urn:schemas-progress-com:bpm:appserverbean:0001" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bean="http://www.springframework.org/schema/beans" xmlns:wsad="urn:schemas-progress-com:WSAD:0010" targetNamespace="urn:schemas-progress-com:bpm:appserverbean:0001" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.springframework.org/schema/beans" schemaLocation="spring-beans-2.5.xsd"/>
+	<xs:import namespace="urn:schemas-progress-com:WSAD:0010" schemaLocation="wsad0010.xsd"/>
+	<xs:element name="AppServerEndpointBean">
+		<xs:annotation>
+			<xs:documentation>Specifies the properties required to connect to a specific AppServer. Used by the Spring framework to instantiate an AppServer bean.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="bean:identifiedType">
+					<xs:sequence>
+						<xs:element name="userName" type="xs:string" nillable="true">
+							<xs:annotation>
+								<xs:documentation>Specifies the user name to use when connecting to an AppServer. Can be unknown/nil.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="password" type="xs:string" nillable="true">
+							<xs:annotation>
+								<xs:documentation>Specifies the password to use when connecting to an AppServer. Can be unknown/nil.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="extraInfo" type="xs:string" nillable="true">
+							<xs:annotation>
+								<xs:documentation>Specifies and extra info passed on to AppServer.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="sessionMode" type="xs:unsignedShort" default="1">
+							<xs:annotation>
+								<xs:documentation>Specifies the session mode of the AppServer connection.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="wsad:ApplicationRuntimeProperties"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

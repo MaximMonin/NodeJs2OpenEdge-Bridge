@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+    "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+
+<web-app>
+  <display-name>Web Services Adapter</display-name>
+  <!-- Enter an optional description of the Web Services Adapater web-application
+       and uncomment this element if supported by the JSE
+       
+  <description>Progress Web Services Adapter (WSA)</description>
+  
+  -->
+  <servlet>
+    <servlet-name>wsa1_servlet</servlet-name>
+    <display-name>Web Services Adapter servlet 1</display-name>
+    <!-- Enter an optional description of the Web Services Adapater servlet
+         and uncomment this element if supported by the JSE
+           
+    <description>Web Services Adpater servlet 1</description>
+    -->
+    
+    <!-- The Java servlet class to load and run.  Do not change this entry -->
+    <servlet-class>com.progress.wsa.WsaServlet</servlet-class>
+    <!-- The servlet initialization parameters for this WSA instance -->
+    <init-param>
+      <param-name>InstallDir</param-name>
+      <!-- Enter the path to the Progress installation on this server -->
+      <param-value>/usr/pro/dlc</param-value>
+    </init-param>
+    <init-param>
+      <param-name>instanceName</param-name>
+      <!-- Enter this WSA servlet instance's name that will be used to locate
+           its properties in the Progress ubroker.properties file -->
+      <param-value>wsa1</param-value>
+    </init-param>
+    <!-- To change the deployment directory from the default, uncomment this
+         parameter and set the value to the correct directory.
+    <init-param>
+      <param-name>deploymentDir</param-name>
+      <param-value>C:/work/deployment/</param-value>
+    </init-param>
+    -->
+    <init-param>
+      <param-name>propertyFileName</param-name>
+      <!-- Enter the path to the Progress ubroker.properties file that holds
+           this WSA servlet's properties. -->
+      <param-value>/usr/pro/dlc/properties/ubroker.properties</param-value>
+    </init-param>
+    <!-- Set the WSA servlet class to load when the JSE starts (1 or 0) -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!-- Enter the URL sub-path that will identify the Web Service application
+       access point where SOAP requests will be sent.  This sub-path will be 
+       appended to the web application's URL path to form the full URL path. 
+       This URL path will for the root sub-path for the admininstration sub-path
+       and the WSDL distribution sub-path below. -->
+  <servlet-mapping>
+    <servlet-name>wsa1_servlet</servlet-name>
+    <url-pattern>/wsa1/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- If user authentication and authorization to the WSA servlets administration
+       access point URL is required, uncomment and fill in the values needed
+       in this security-contraint element. 
+       Enter the role-name(s) the JSE will require to authorize an administrator.
+       The url-pattern format is [servlet-mapping-url-pattern]/admin/*, where 
+       url-pattern is taken from the servlet-mapping declaration above 
+       (without the "/*" postfix).
+            Example: 
+                servlet-mapping url-pattern = /wsa1/*     
+                security-constring url-patter = /wsa1/admin/*
+       If HTTPS (SSL) client connections are required, change the 
+       transport-guarantee value from NONE to CONFIDENTIAL.
+  -->
+  
+ <!-- 
+  <security-constraint>
+    <web-resource-collection>
+       <web-resource-name>wsa1 Admin</web-resource-name>
+       <url-pattern>/wsa1/admin/*</url-pattern>
+       <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+       <role-name>PSCAdmin</role-name>
+       <role-name>PSCOper</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+       <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+-->  
+  
+  <!-- If user authentication and authorization to the WSA Web Service 
+       applications URL is required, uncomment and fill in the values needed
+       in this security-contraint element. 
+       Enter the role-name(s) the JSE will require to authorize access to
+       Web Service applications hosted by the WSA.
+       The url-pattern format is [servlet-mapping-url-pattern]/, where 
+       url-pattern is taken from the servlet-mapping declaration above 
+       (without the "/*" postfix).
+            Example: 
+                servlet-mapping url-pattern = /wsa1/*     
+                security-constring url-patter = /wsa1/
+       If HTTPS (SSL) client connections are required, change the 
+       transport-guarantee value from NONE to CONFIDENTIAL.
+  -->
+  
+<!--
+  <security-constraint>
+    <web-resource-collection>
+       <web-resource-name>wsa1 Web Services</web-resource-name>
+       <url-pattern>/wsa1/</url-pattern>
+       <http-method>POST</http-method>   
+    </web-resource-collection>
+    <auth-constraint>
+       <role-name>enter_jse_role_name</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+       <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+-->
+  
+  <!-- If user authentication and authorization to the WSDL document distribution
+       access point URL is required, uncomment and fill in the values needed
+       in this security-contraint element. Enter the role name(s) the JSE will 
+       require any authorized user to be a member of.  
+       Enter the role-name(s) the JSE will require to authorize access to WSDL
+       documents.
+       The url-pattern format is [servlet-mapping-url-pattern]/wsdl/*, where 
+       url-pattern is taken from the servlet-mapping declaration above 
+       (without the "/*" postfix).
+            Example: 
+                servlet-mapping url-pattern = /wsa1/*     
+                security-constring url-patter = /wsa1/wsdl/*
+       If HTTPS (SSL) client connections are required, change the 
+       transport-guarantee value from NONE to CONFIDENTIAL.
+  -->
+  
+<!--
+  <security-constraint>
+    <web-resource-collection>
+       <web-resource-name>wsa1 WSDL Access</web-resource-name>
+       <url-pattern>/wsa1/wsdl/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+       <role-name>enter_jse_role_name</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+       <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  -->
+  
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>Web Services Adapter</realm-name>
+  </login-config>
+  
+</web-app>

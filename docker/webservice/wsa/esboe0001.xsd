@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:oe="urn:schemas-progress-com:esboe:0001" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsad="urn:schemas-progress-com:WSAD:0007" xmlns:xq="http://www.sonicsw.com/sonicxq" targetNamespace="urn:schemas-progress-com:esboe:0001" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:schemas-progress-com:WSAD:0007" schemaLocation="wsad0007.xsd"/>
+	<xs:import namespace="http://www.sonicsw.com/sonicxq" schemaLocation="InvocationAction.xsd"/>
+	<xs:element name="command" type="xq:commandType">
+		<xs:annotation>
+			<xs:documentation>Sonic script engine command</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="script" type="xq:scriptType">
+		<xs:annotation>
+			<xs:documentation>Sonic script engine script</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="invocationType">
+		<xs:complexContent>
+			<xs:restriction base="xq:scriptCommandType">
+				<xs:sequence>
+					<xs:element name="command">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Operation">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="wsad:PGProcType">
+												<xs:attribute name="ipIndex" type="xs:int"/>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="parameterList" type="xq:parameterListType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
