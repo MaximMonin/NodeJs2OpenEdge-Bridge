@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  bridge:
+    image: nodejs_oebridge:latest
+    restart: always
+    depends_on:
+      - webservice
+    container_name: oebridge_${NAMEPREFIX}
+    stop_grace_period: 5s
+    networks:
+      default:
+        aliases:
+          - bridge
+    expose:
+      - 3000
+    environment:
+      UrlEndPoint: 'http://webservice:8080/wsa/wsa1'
+      LogLevel: 1
+
+  webservice:
+    image: openedge_webservice:latest
+    restart: always
+    container_name: webservice_${NAMEPREFIX}
+    stop_grace_period: 5s
+    networks:
+      default:
+        aliases:
+          - webservice
+    expose:
+      - 8080
+    volumes:
+      - ./log:/opt/tomcat/logs
+      - ./webservice:/opt/tomcat/webapps/wsa/wsa1
+
+#  Openedge Appserver obliksaas_db:3100
+#  backend:
+#    image: backend_extdb:latest
+#    restart: always
+#    container_name: backend_${NAMEPREFIX}
+#    networks:
+#      default:
+#        aliases:
+#          - obliksaas_db
+#    environment:
+#      - bootstrap.memory_lock=true
+#      - "JAVA_OPTS=-Xms4g -Xmx4g"
+#      - OPENEDGEDB_HOST=10.22.10.100
+#      - OPENEDGEDB_PORT=60000
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1    
+#    stop_signal: SIGINT
+#    stop_grace_period: 60s
+
+
+networks:
+  default:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default

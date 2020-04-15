@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="OpenedgeBridge" targetNamespace="urn:openedge-bridge" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:openedge-bridge" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:prodata="urn:schemas-progress-com:xml-prodata:0001" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:S1="urn:soap-fault:details" xmlns:S2="urn:openedge-bridge:OpenedgeBridge">
+<wsdl:documentation>EncodingType=DOC_LITERAL, WSA_Product=11.7.5 - Fri Jun  7 08:24:07 EDT 2019</wsdl:documentation>
+  <wsdl:types>
+<schema elementFormDefault="unqualified" targetNamespace="urn:soap-fault:details" xmlns="http://www.w3.org/2001/XMLSchema"><element name="FaultDetail"><complexType><sequence><element name="errorMessage" type="xsd:string"/><element name="requestID" type="xsd:string"/></sequence></complexType></element></schema>
+<schema elementFormDefault="qualified" targetNamespace="urn:openedge-bridge:OpenedgeBridge" xmlns="http://www.w3.org/2001/XMLSchema"><element name="OpenedgeBridge"><complexType><sequence><element name="iHandler" nillable="true" type="xsd:string"/><element name="iInputPars" nillable="true" type="xsd:string"/><element name="iInputBase64" nillable="true" type="xsd:string"/><element name="iIncludeMetaSchema" nillable="true" type="xsd:boolean"/></sequence></complexType></element><element name="OpenedgeBridgeResponse"><complexType><sequence><element name="result" nillable="true" type="xsd:string"/><element name="oOutputPars" nillable="true" type="xsd:string"/><element name="oOutputBase64" nillable="true" type="xsd:string"/><element name="oDataset" nillable="true" type="xsd:string"/><element name="oErrMsg" nillable="true" type="xsd:string"/></sequence></complexType></element></schema>
+  </wsdl:types>
+  <wsdl:message name="OpenedgeBridge_OpenedgeBridgeResponse">
+    <wsdl:part name="parameters" element="S2:OpenedgeBridgeResponse"/>
+  </wsdl:message>
+  <wsdl:message name="OpenedgeBridge_OpenedgeBridge">
+    <wsdl:part name="parameters" element="S2:OpenedgeBridge"/>
+  </wsdl:message>
+  <wsdl:message name="FaultDetailMessage">
+    <wsdl:part name="FaultDetail" element="S1:FaultDetail"/>
+  </wsdl:message>
+  <wsdl:portType name="OpenedgeBridgeObj">
+    <wsdl:operation name="OpenedgeBridge">
+      <wsdl:input message="tns:OpenedgeBridge_OpenedgeBridge"/>
+      <wsdl:output message="tns:OpenedgeBridge_OpenedgeBridgeResponse"/>
+      <wsdl:fault name="OpenedgeBridgeFault" message="tns:FaultDetailMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OpenedgeBridgeObj" type="tns:OpenedgeBridgeObj">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="OpenedgeBridge">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="OpenedgeBridgeFault">
+        <soap:fault name="OpenedgeBridgeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OpenedgeBridgeService">
+    <wsdl:port name="OpenedgeBridgeObj" binding="tns:OpenedgeBridgeObj">
+<wsdl:documentation></wsdl:documentation>
+      <soap:address location="http://localhost:8080/wsa/wsa1"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
