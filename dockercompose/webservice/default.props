@@ -2,9 +2,9 @@
 <ApplicationRuntimeProperties xmlns="urn:schemas-progress-com:WSAD:0011" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <runtimePropertyVersion>5</runtimePropertyVersion>
     <appServiceProtocol>AppserverDC</appServiceProtocol>
-    <appServiceHost>obliksaas_db</appServiceHost>
+    <appServiceHost>appServiceHost</appServiceHost>
     <appServicePort>3100</appServicePort>
-    <appServiceName>aswebservice</appServiceName>
+    <appServiceName>appServiceName</appServiceName>
     <staleO4GLObjectTimeout>0</staleO4GLObjectTimeout>
     <minSessions>5</minSessions>
     <maxSessions>0</maxSessions>

@@ -7,6 +7,8 @@ DEFINE OUTPUT PARAMETER oOutputBase64      AS LONGCHAR   NO-UNDO.    /* OUTPUT b
 DEFINE OUTPUT PARAMETER oDataset           AS LONGCHAR   NO-UNDO.    /* OUTPUT dataset base64 xml prodataset */
 DEFINE OUTPUT PARAMETER oErrMsg            AS CHARACTER  NO-UNDO.    /* Error message */
 
+if iHandler = "healthcheck" then return.
+
 DEFINE VARIABLE temp1 AS MEMPTR NO-UNDO.
 DEFINE VARIABLE temp2 AS MEMPTR NO-UNDO.
 DEFINE VARIABLE temp3 AS MEMPTR NO-UNDO.

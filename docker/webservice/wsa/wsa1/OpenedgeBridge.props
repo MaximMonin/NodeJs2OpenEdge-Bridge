@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApplicationRuntimeProperties xmlns="urn:schemas-progress-com:WSAD:0011" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <runtimePropertyVersion>5</runtimePropertyVersion>
+    <appServiceProtocol>AppserverDC</appServiceProtocol>
+    <appServiceHost>appServiceHost</appServiceHost>
+    <appServicePort>3100</appServicePort>
+    <appServiceName>OpenedgeBridge</appServiceName>
+    <staleO4GLObjectTimeout>0</staleO4GLObjectTimeout>
+    <minSessions>5</minSessions>
+    <maxSessions>0</maxSessions>
+    <initialSessions>5</initialSessions>
+    <idleSessionTimeout>0</idleSessionTimeout>
+    <requestWaitTimeout>5</requestWaitTimeout>
+    <nsClientMinPort>0</nsClientMinPort>
+    <nsClientMaxPort>0</nsClientMaxPort>
+    <nsClientPortRetry>3</nsClientPortRetry>
+    <nsClientPortRetryInterval>200</nsClientPortRetryInterval>
+    <nsClientPicklistSize>8</nsClientPicklistSize>
+    <nsClientPicklistExpiration>300</nsClientPicklistExpiration>
+    <serviceAvailable>1</serviceAvailable>
+    <serviceLoggingLevel>2</serviceLoggingLevel>
+    <serviceLoggingEntryTypes>WSADefault</serviceLoggingEntryTypes>
+    <appServiceConnectionMode>1</appServiceConnectionMode>
+    <serviceFaultLevel>2</serviceFaultLevel>
+    <waitIfBusy>0</waitIfBusy>
+    <connectionLifetime>0</connectionLifetime>
+    <minIdleConnections>0</minIdleConnections>
+    <noHostVerify>1</noHostVerify>
+    <noSessionReuse>0</noSessionReuse>
+    <appServerKeepalive>denyClientASK,allowServerASK</appServerKeepalive>
+    <clientASKActivityTimeout>60</clientASKActivityTimeout>
+    <clientASKResponseTimeout>60</clientASKResponseTimeout>
+    <connectionTimeout>0</connectionTimeout>
+    <actionalGroupName/>
+    <sslCiphers>Default</sslCiphers>
+    <sslProtocols>Default</sslProtocols>
+</ApplicationRuntimeProperties>

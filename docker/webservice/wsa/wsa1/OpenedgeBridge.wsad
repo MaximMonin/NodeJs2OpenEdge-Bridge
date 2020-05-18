@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AppContainer xmlns="urn:schemas-progress-com:WSAD:0011" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <FriendlyName xsi:nil="true"/>
+  <ApplicationRuntimeProperties xsi:nil="true"/>
+  <WSAD>
+    <AppObject>
+      <PGVersion>
+        <PXGVersion>03</PXGVersion>
+      </PGVersion>
+      <PGGenInfo isSessionFree="true">
+        <Author></Author>
+        <VersionString></VersionString>
+        <VersionNumber>1</VersionNumber>
+        <Package></Package>
+        <Service>OpenedgeBridge</Service>
+        <WorkDir>/usr/pro</WorkDir>
+        <VerboseLogging>true</VerboseLogging>
+        <LeaveProxyFiles>false</LeaveProxyFiles>
+        <SaveBeforeGen>true</SaveBeforeGen>
+        <DotNetClient>false</DotNetClient>
+        <JavaClient>false</JavaClient>
+        <WebServicesClient>true</WebServicesClient>
+        <ESBClient>false</ESBClient>
+        <ESBClient2>false</ESBClient2>
+        <SilverlightClient>false</SilverlightClient>
+        <RESTClient>false</RESTClient>
+        <UserDefinedAppService>false</UserDefinedAppService>
+        <JavaCompilerType>1</JavaCompilerType>
+        <JavaCompiler>&lt;Install Dir&gt;\jdk\bin\javac</JavaCompiler>
+        <JavaSwitches></JavaSwitches>
+        <JavaClasspathSwitch>-classpath</JavaClasspathSwitch>
+        <JavaClasspath>&lt;Proxy Dir&gt;;&lt;Install Dir&gt;\java\progress.jar;&lt;Install Dir&gt;\java\messages.jar;;&lt;Default classes.zip&gt;;&lt;Install Dir&gt;\java\ext\ecore.sdo.jar;&lt;Install Dir&gt;\java\ext\ecore.change.jar;&lt;Install Dir&gt;\java\ext\commonj.sdo.jar;&lt;Install Dir&gt;\java\ext\ecore.jar;&lt;Install Dir&gt;\java\ext\ecore.resources.jar;&lt;Install Dir&gt;\java\ext\common.jar;&lt;Install Dir&gt;\java\ext\ecore.xmi.jar</JavaClasspath>
+        <DotNetCompilerType>4</DotNetCompilerType>
+        <DotNetCompiler>csc</DotNetCompiler>
+        <DotNetSwitches></DotNetSwitches>
+        <DotNetXSDGenerator>xsd</DotNetXSDGenerator>
+        <DotNetNamespace></DotNetNamespace>
+        <DotNetTitle></DotNetTitle>
+        <DotNetVersion></DotNetVersion>
+        <DotNetDesc></DotNetDesc>
+        <DotNetCompany></DotNetCompany>
+        <DotNetProduct></DotNetProduct>
+        <DotNetPublicKey></DotNetPublicKey>
+        <DotNetDelaySign>false</DotNetDelaySign>
+        <DotNetRuntime>digitally signed</DotNetRuntime>
+        <DotNetDataSetNamespace>StrongTypesNS</DotNetDataSetNamespace>
+        <DNUseDefaultDSNamespace>true</DNUseDefaultDSNamespace>
+        <DNUseNamespaceAsDirs>true</DNUseNamespaceAsDirs>
+        <DotNetUseNullableTypes>false</DotNetUseNullableTypes>
+        <SilverlightDomainServiceNamespace></SilverlightDomainServiceNamespace>
+        <SilverlightUseDefaultDomainServiceNamespace>true</SilverlightUseDefaultDomainServiceNamespace>
+        <SilverlightEntityNamespace></SilverlightEntityNamespace>
+        <SilverlightUseDefaultEntityNamespace>true</SilverlightUseDefaultEntityNamespace>
+      </PGGenInfo>
+      <DeploymentWizard>
+        <CurrentEncoding>3</CurrentEncoding>
+        <SoapEndpointURL>http://localhost:8080/wsa/wsa1</SoapEndpointURL>
+        <WebServiceNamespace userDefined="true">urn:openedge-bridge</WebServiceNamespace>
+        <SoapAction appendToSoapAction="false"/>
+        <ConnectReturnString userDefined="false"/>
+        <TestWSDL RPCEncoded="false" RPCLiteral="false" DocLiteral="true"/>
+        <ESBEncoding>3</ESBEncoding>
+        <EntryEndpoint useDefault="true"/>
+        <FaultEndpoint useDefault="true"/>
+        <RejectedEndpoint useDefault="true"/>
+        <Container></Container>
+        <AppserverURL>AppServerDC://localhost:3091</AppserverURL>
+        <FileName overWrite="false">OpenedgeBridge</FileName>
+        <ResourceDirectory>/Resources/OpenEdgeServices</ResourceDirectory>
+        <SonicAppService useFileSystem="false" deployToDS="false" createXAR="false">
+          <ResourceDirectory overWrite="false"></ResourceDirectory>
+          <XARName></XARName>
+        </SonicAppService>
+      </DeploymentWizard>
+      <Name>OpenedgeBridge</Name>
+      <ProPath>/usr/pro</ProPath>
+      <HelpString></HelpString>
+      <ObjectType>false</ObjectType>
+      <AllowUnknown>true</AllowUnknown>
+      <IsTTResultSet>true</IsTTResultSet>
+      <WriteDatasetBeforeImage>true</WriteDatasetBeforeImage>
+      <Procedure isPersistent="false" useFullName="false">
+        <Name>OpenedgeBridge</Name>
+        <ProcPath>webservices\</ProcPath>
+        <ProPath>/usr/pro</ProPath>
+        <ProcExt>p</ProcExt>
+        <ProcDetail isCustomized="true" usesUnknownDefault="true" useRetVal="false" usesTTMappingDefault="true" IsTTResultSet="true" usesBeforeImageDefault="true" IsMappedToSubmit="false">
+          <Name>OpenedgeBridge</Name>
+          <HelpString></HelpString>
+          <ReturnValue allowUnknown="true" ordinal="0" writeXmlBeforeImage="false">
+            <Name>result</Name>
+            <OrigName>result</OrigName>
+            <Type>1</Type>
+            <Mode>0</Mode>
+          </ReturnValue>
+          <Parameter allowUnknown="true" ordinal="1" writeXmlBeforeImage="false">
+            <Name>iHandler</Name>
+            <OrigName>iHandler</OrigName>
+            <Type>1</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="2" writeXmlBeforeImage="false">
+            <Name>iInputPars</Name>
+            <OrigName>iInputPars</OrigName>
+            <Type>39</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="3" writeXmlBeforeImage="false">
+            <Name>iInputBase64</Name>
+            <OrigName>iInputBase64</OrigName>
+            <Type>39</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="4" writeXmlBeforeImage="false">
+            <Name>iIncludeMetaSchema</Name>
+            <OrigName>iIncludeMetaSchema</OrigName>
+            <Type>3</Type>
+            <Mode>1</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="5" writeXmlBeforeImage="false">
+            <Name>oOutputPars</Name>
+            <OrigName>oOutputPars</OrigName>
+            <Type>39</Type>
+            <Mode>2</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="6" writeXmlBeforeImage="false">
+            <Name>oOutputBase64</Name>
+            <OrigName>oOutputBase64</OrigName>
+            <Type>39</Type>
+            <Mode>2</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="7" writeXmlBeforeImage="false">
+            <Name>oDataset</Name>
+            <OrigName>oDataset</OrigName>
+            <Type>39</Type>
+            <Mode>2</Mode>
+          </Parameter>
+          <Parameter allowUnknown="true" ordinal="8" writeXmlBeforeImage="false">
+            <Name>oErrMsg</Name>
+            <OrigName>oErrMsg</OrigName>
+            <Type>1</Type>
+            <Mode>2</Mode>
+          </Parameter>
+        </ProcDetail>
+      </Procedure>
+    </AppObject>
+  </WSAD>
+</AppContainer>

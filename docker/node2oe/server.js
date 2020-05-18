@@ -5,9 +5,9 @@ var xml2js = require('xml2js');
 var options = {compact: true, ignoreComment: true, spaces: 4};
 
 var loglevel = process.env.LogLevel || 1;
-var urlendpoint = process.env.UrlEndPoint || 'http://10.20.10.62:8093/wsa/wsa1';
+var urlendpoint = process.env.UrlEndPoint;
 var url = urlendpoint + '/wsdl?TargetUri=OpenedgeBridge';
-var args = { iHandler: "nodejs/tab2xml2.p", iInputPars: "table=clients", iInputBase64: "", iIncludeMetaSchema: 1 };
+var args = { iHandler: "", iInputPars: "", iInputBase64: "", iIncludeMetaSchema: 1 };
 
 
 app.use(express.json());
@@ -72,87 +72,24 @@ var processQuery = function (req, res) {
           var r = Buffer.from(result.oOutputBase64,'base64').toString('utf8');
           if (loglevel > 1) console.log("OutputData:", r);
           if (result.oErrMsg != '') console.log("Webservice ErrMessage:", result.oErrMsg);
-
-          var r2= Buffer.from(result.oDataset,'base64').toString('utf8');
-          var parser = new xml2js.Parser({explicitArray: false, trim: true});
-          parser.parseString(r2, (err, r3) => {
-//            console.log('OutputDataset:', r3);
-          });
           res.status(200).end (r);
         }
       });
     }
   });
-
-//  res.send(req.url);
 }
 
 app.get('/cgi-bin/wspd_cgi.sh/WService*', processQuery);
 app.post('//cgi-bin/wspd_cgi.sh/WService*', processQuery);
 app.post('/cgi-bin/wspd_cgi.sh/WService*', processQuery);
 
-
-app.get('/tab2xml*', function(req, res) {
-  var str = req.url;
-  var arr = str.split("&");
-  var tablename;
-  console.log ('Incoming tabxml (', str, ')' );
-  for(var i=0;i<arr.length;i++) 
-  {
-    if (i > 0)
-    {
-      var param = arr [i];
-      var arr2 = param.split("=");
-      if (arr2.length == 2 && arr2[0] == "table") 
-      {
-        tablename = arr2[1];
-        console.log ('Incoming tabxml (', tablename, ')' );
-
-        var inputPars = 'tablename=' + tablename;
-        args.iInputPars = inputPars;
-        soap.createClient(url, {endpoint: urlendpoint}, function(err, client) 
-        {
-          if (err) console.log("ERROR->"+err);
-          else 
-          {
-            client.OpenedgeBridge(args, function(err, result) 
-            {
-     	      console.log("webservice RESULT");
-              if (err) console.log("ERROR->"+err);
-              else 
-              {
-                console.log("OutputPar:", result.oOutputPars);
-                console.log("OutputData:", result.oOutputBase64);
-                console.log("ErrMessage:", result.oErrMsg);
-                var r= Buffer.from(result.oDataset,'base64').toString('utf8');
-
-                var xml2js = require('xml2js');
-                var parser = new xml2js.Parser({explicitArray: false, trim: true});
-                parser.parseString(r, (err, r2) => {
-                  console.log('OutputDataset:', r2);
-                  res.status(200).end(r2);
-                });
-//                console.log("OutputDataset", r);
-
-//                res.send (r);
-
-              }
-            });
-          }
-        });
-      }
-    }
-  }
-//  res.send(req.url);
-});
-
 app.get('/', function(req, res) {
-  res.send('WebService');
-  console.log ('Incoming query get:', req.url )
+  res.send('Openedge Bridge');
+//  console.log ('Incoming query get:', req.url )
 });
 app.post('/', function (req, res) {
-  res.send('WebService');
-  console.log ('Incoming query get:', req.url )
+  res.send('Openedge Bridge');
+//  console.log ('Incoming query get:', req.url )
 });
 
 app.get('/*', function(req, res) {
